@@ -3,6 +3,7 @@
  */
 package com.banking.application.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,8 @@ import com.banking.application.model.Applicants;
 import com.banking.application.model.BankDetails;
 import com.banking.application.model.ContactDetails;
 import com.banking.application.service.BankDetailsInterface;
+import com.banking.application.service.ExcelService;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 /**
  * 
@@ -32,6 +35,8 @@ import com.banking.application.service.BankDetailsInterface;
 public class BankController {
 	@Autowired
 	private BankDetailsInterface bankDet;
+	@Autowired
+	ExcelService excelService;
 	
 	
 	
@@ -124,6 +129,13 @@ public class BankController {
 	@GetMapping(value = "/addresses/{addressId}")
 	public Optional<Address> getAddress(@PathVariable long addressId){
 		return bankDet.getAddress(addressId);
+	}
+	@GetMapping(value = "/excel")
+	public void getexcel() throws IOException,InvalidFormatException{
+		String path="C:\\Users\\reddy\\work";
+		String fileName = "test.xlsx";
+		String sheetName ="krm";
+		excelService.readExcel(sheetName, fileName, path);
 	}
 
 }

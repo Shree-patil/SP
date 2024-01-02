@@ -132,6 +132,7 @@ public class BankController {
 	}
 	@GetMapping(value = "/excel")
 	public void getexcel() throws IOException,InvalidFormatException{
+		System.out.println("we are in Excel reading");
 		String path="C:\\Users\\reddy\\work";
 		String fileName = "test.xlsx";
 		String sheetName ="krm";
